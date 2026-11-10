@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yourfinplan101 - วางแผนการเงินเบื้องต้น</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fff5f5',  // Creamy pink
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185', // Soft Rose Pink
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #fffaf9; /* Soft cream background */
+        }
+        .minimal-card {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+        .minimal-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <!-- Navbar -->
+    <nav class="bg-white/90 backdrop-blur-sm border-b border-slate-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-brand-400 rounded-xl flex items-center justify-center text-white">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <span class="font-bold text-xl text-slate-800 tracking-tight">yourfinplan101</span>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a href="#about" class="text-slate-500 hover:text-brand-600 transition">เหตุผลที่ต้องวางแผน</a>
+                    <a href="#steps" class="text-slate-500 hover:text-brand-600 transition">4 ขั้นตอน</a>
+                    <a href="#investment" class="text-slate-500 hover:text-brand-600 transition">การลงทุน</a>
+                    <a href="#ml-finance" class="text-slate-500 hover:text-brand-600 transition">เทคโนโลยี AI</a>
+                    <a href="#dashboard" class="text-brand-600 font-semibold hover:text-brand-700 transition">แดชบอร์ดคำนวณเงิน</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-24 pb-20 lg:pt-32 lg:pb-28 relative overflow-hidden bg-slate-50">
+        <!-- Minimal subtle blob -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-brand-200/50 blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 rounded-full bg-brand-100/50 blur-3xl"></div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <span class="inline-block py-1 px-3 rounded-full bg-brand-100 text-brand-700 text-xs font-semibold mb-6 tracking-wide">
+                คู่มือการเงินเบื้องต้น
+            </span>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-slate-900">
+                เริ่มต้นวางแผนการเงิน <br class="hidden md:block">
+                เพื่อความมั่นคงในอนาคต
+            </h1>
+            <p class="text-lg text-slate-500 mb-10 max-w-2xl mx-auto leading-relaxed">
+                การจัดการรายได้ หนี้สิน และการลงทุน ไม่ใช่เรื่องซับซ้อนอย่างที่คิด มาเริ่มต้นสร้างรากฐานทางการเงินที่ดีทีละขั้นตอนด้วยเครื่องมือที่เข้าใจง่าย
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#dashboard" class="bg-brand-400 text-slate-900 font-semibold px-8 py-3 rounded-full hover:bg-brand-500 transition shadow-sm">
+                    คำนวณการแบ่งเงิน
+                </a>
+                <a href="#steps" class="bg-white text-slate-600 border border-slate-200 font-semibold px-8 py-3 rounded-full hover:bg-slate-50 transition shadow-sm">
+                    ดูขั้นตอนการวางแผน
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Why Plan Section -->
+    <section id="about" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-16 text-center max-w-2xl mx-auto">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">ทำไมถึงต้องวางแผนการเงิน?</h2>
+                <p class="text-slate-500">การเตรียมความพร้อมล่วงหน้าช่วยลดความเสี่ยงและเพิ่มอิสระในการใช้ชีวิต</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="minimal-card p-8 text-center">
+                    <div class="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center mb-6 mx-auto text-brand-500">
+                        <i class="fa-solid fa-umbrella text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3 text-slate-800">เกราะป้องกันความเสี่ยง</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        ชีวิตมีความไม่แน่นอน การมีเงินสำรองฉุกเฉินจะช่วยให้คุณและครอบครัวก้าวผ่านวิกฤตต่างๆ เช่น การเจ็บป่วยหรือว่างงานได้โดยไม่ต้องกู้หนี้ยืมสิน
+                    </p>
+                </div>
+                <div class="minimal-card p-8 text-center">
+                    <div class="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center mb-6 mx-auto text-brand-500">
+                        <i class="fa-solid fa-map text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3 text-slate-800">แผนที่สู่อิสรภาพ</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        เป้าหมายเช่น การซื้อบ้าน การศึกษาบุตร หรือการเกษียณอายุที่สบาย จะเกิดขึ้นได้จริงเมื่อมีการกำหนดทิศทางและการจัดสรรเงินที่ชัดเจน
+                    </p>
+                </div>
+                <div class="minimal-card p-8 text-center">
+                    <div class="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center mb-6 mx-auto text-brand-500">
+                        <i class="fa-solid fa-arrow-trend-up text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3 text-slate-800">เอาชนะเงินเฟ้อ</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        มูลค่าของเงินลดลงทุกปีจากเงินเฟ้อ การวางแผนนำเงินไปลงทุนอย่างถูกวิธีจะช่วยรักษาและเพิ่มพูนอำนาจซื้อของคุณในระยะยาว
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Steps Section -->
+    <section id="steps" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">4 ขั้นตอนพื้นฐาน</h2>
+                <p class="text-slate-500">เริ่มต้นสร้างสุขภาพทางการเงินที่ดีไปทีละขั้นตอน</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="minimal-card p-6 border-t-4 border-t-brand-300">
+                    <div class="text-slate-400 text-xs font-bold tracking-wider mb-2">STEP 01</div>
+                    <h3 class="text-lg font-bold mb-3 text-slate-800">สำรวจตัวเอง</h3>
+                    <p class="text-slate-500 text-sm">จดบันทึกรายรับ-รายจ่าย เพื่อดูพฤติกรรมการใช้เงิน และทำงบดุลเพื่อดูว่าเรามีทรัพย์สินและหนี้สินสุทธิเท่าไหร่ในปัจจุบัน</p>
+                </div>
+                <div class="minimal-card p-6 border-t-4 border-t-brand-400">
+                    <div class="text-slate-400 text-xs font-bold tracking-wider mb-2">STEP 02</div>
+                    <h3 class="text-lg font-bold mb-3 text-slate-800">เก็บเงินสำรอง</h3>
+                    <p class="text-slate-500 text-sm">หักเงินออมก่อนใช้จ่าย ตั้งเป้าหมายเก็บเงินสำรองฉุกเฉินให้เท่ากับค่าใช้จ่ายต่อเดือน 3 ถึง 6 เดือน ในบัญชีที่มีสภาพคล่องสูง</p>
+                </div>
+                <div class="minimal-card p-6 border-t-4 border-t-brand-500">
+                    <div class="text-slate-400 text-xs font-bold tracking-wider mb-2">STEP 03</div>
+                    <h3 class="text-lg font-bold mb-3 text-slate-800">จัดการหนี้สิน</h3>
+                    <p class="text-slate-500 text-sm">หลีกเลี่ยงการสร้างหนี้บริโภคที่ไม่จำเป็น และจัดลำดับการชำระหนี้โดยเน้นโปะหนี้ที่มีอัตราดอกเบี้ยสูงสุดเป็นอันดับแรก</p>
+                </div>
+                <div class="minimal-card p-6 border-t-4 border-t-brand-600">
+                    <div class="text-slate-400 text-xs font-bold tracking-wider mb-2">STEP 04</div>
+                    <h3 class="text-lg font-bold mb-3 text-slate-800">เริ่มต้นลงทุน</h3>
+                    <p class="text-slate-500 text-sm">นำเงินที่เหลือจากการออมไปลงทุนในสินทรัพย์ต่างๆ เพื่อให้เงินทำงาน ตามระดับความเสี่ยงที่รับได้และเป้าหมายของแต่ละคน</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment & Risk Levels Section -->
+    <section id="investment" class="py-24 bg-white relative border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-16 text-center max-w-2xl mx-auto">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">การลงทุนและความเสี่ยง</h2>
+                <p class="text-slate-500">ผลตอบแทนมักมาพร้อมกับความเสี่ยง การเลือกลงทุนควรสอดคล้องกับระยะเวลาที่คุณสามารถถือครองได้</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Low Risk -->
+                <div class="minimal-card p-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-bold text-slate-800">ความเสี่ยงต่ำ</h3>
+                        <span class="text-slate-600 bg-slate-100 px-3 py-1 rounded-full text-xs font-semibold">1-3% ต่อปี</span>
+                    </div>
+                    <p class="text-slate-500 text-sm mb-6 h-16">เน้นรักษาเงินต้นเป็นหลัก โอกาสขาดทุนน้อยมาก เหมาะสำหรับการพักเงินหรือเป้าหมายระยะสั้น (1-3 ปี)</p>
+                    <div class="border-t border-slate-100 pt-4">
+                        <ul class="text-sm text-slate-600 space-y-3">
+                            <li class="flex items-start"><i class="fa-solid fa-check text-brand-500 mt-1 mr-2 text-xs"></i> เงินฝากประจำ / ออมทรัพย์ดิจิทัล</li>
+                            <li class="flex items-start"><i class="fa-solid fa-check text-brand-500 mt-1 mr-2 text-xs"></i> สลากออมทรัพย์</li>
+                            <li class="flex items-start"><i class="fa-solid fa-check text-brand-500 mt-1 mr-2 text-xs"></i> กองทุนรวมตลาดเงิน</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Medium Risk -->
+                <div class="minimal-card p-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-bold text-slate-800">ความเสี่ยงปานกลาง</h3>
+                        <span class="text-slate-600 bg-brand-50 px-3 py-1 rounded-full text-xs font-semibold">4-7% ต่อปี</span>
+                    </div>
+                    <p class="text-slate-500 text-sm mb-6 h-16">เริ่มมีความผันผวน มีโอกาสสร้างผลตอบแทนชนะเงินเฟ้อได้ดี เหมาะสำหรับเป้าหมายระยะกลาง (3-7 ปี)</p>
+                    <div class="border-t border-slate-100 pt-4">
+                        <ul class="text-sm text-slate-600 space-y-3">
+                            <li class="flex items-start"><i class="fa-solid fa-check text-brand-500 mt-1 mr-2 text-xs"></i> พันธบัตรรัฐบาล / หุ้นกู้เอกชน</li>
+                            <li class="flex items-start"><i class="fa-solid fa-check text-brand-500 mt-1 mr-2 text-xs"></i> กองทุนรวมผสม</li>
+                            <li class="flex items-start"><i class="fa-solid fa-check text-brand-500 mt-1 mr-2 text-xs"></i> กองทุนรวมอสังหาริมทรัพย์</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- High Risk -->
+                <div class="minimal-card p-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-bold text-slate-800">ความเสี่ยงสูง</h3>
+                        <span class="text-slate-600 bg-brand-100 px-3 py-1 rounded-full text-xs font-semibold">8-12%+ ต่อปี</span>
+                    </div>
+                    <p class="text-slate-500 text-sm mb-6 h-16">ความผันผวนสูงมาก มีโอกาสขาดทุน แต่ในระยะยาวสามารถสร้างผลตอบแทนได้ดีที่สุด (7 ปีขึ้นไป)</p>
+                    <div class="border-t border-slate-100 pt-4">
+                        <ul class="text-sm text-slate-600 space-y-3">
+                            <li class="flex items-start"><i class="fa-solid fa-check text-brand-500 mt-1 mr-2 text-xs"></i> หุ้นรายตัว / กองทุนรวมดัชนีหุ้น</li>
+                            <li class="flex items-start"><i class="fa-solid fa-check text-brand-500 mt-1 mr-2 text-xs"></i> ทองคำ / สินค้าโภคภัณฑ์</li>
+                            <li class="flex items-start"><i class="fa-solid fa-check text-brand-500 mt-1 mr-2 text-xs"></i> สินทรัพย์ทางเลือกอื่นๆ</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Machine Learning in Finance Section -->
+    <section id="ml-finance" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 text-center max-w-2xl mx-auto">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">การประยุกต์ใช้ AI และ ML ในการเงิน</h2>
+                <p class="text-slate-500">เทคโนโลยี Machine Learning ช่วยยกระดับการวิเคราะห์ทางการเงินให้แม่นยำและรวดเร็วยิ่งขึ้น</p>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="flex justify-center mb-10">
+                <div class="bg-white p-1 rounded-full border border-slate-200 inline-flex shadow-sm">
+                    <button onclick="switchTab('supervised')" id="tab-supervised" class="px-6 sm:px-10 py-2.5 font-semibold text-slate-900 bg-brand-400 rounded-full transition text-sm whitespace-nowrap">
+                        Supervised Learning
+                    </button>
+                    <button onclick="switchTab('unsupervised')" id="tab-unsupervised" class="px-6 sm:px-10 py-2.5 font-medium text-slate-500 hover:text-slate-700 rounded-full transition text-sm whitespace-nowrap">
+                        Unsupervised Learning
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab Content: Supervised -->
+            <div id="content-supervised" class="transition-opacity duration-300">
+                <div class="bg-white rounded-2xl p-6 mb-8 text-center max-w-3xl mx-auto border border-slate-100 shadow-sm">
+                    <h3 class="font-bold text-slate-800 mb-2">เรียนรู้แบบมีผู้สอน (Supervised Learning)</h3>
+                    <p class="text-slate-500 text-sm">โมเดลเรียนรู้จากชุดข้อมูลที่มีการเฉลยคำตอบไว้แล้ว (Labeled Data) เพื่อนำไปทำนายหรือจำแนกข้อมูลใหม่ๆ ที่จะเข้ามาในอนาคต</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="minimal-card p-6">
+                        <div class="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center mb-4 text-slate-600">
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                        </div>
+                        <h4 class="text-base font-bold mb-2 text-slate-800">Credit Scoring</h4>
+                        <p class="text-slate-500 text-sm">ประเมินความน่าจะเป็นในการผิดนัดชำระหนี้ โดยเรียนรู้จากประวัติข้อมูลทางการเงินและการชำระเงินของลูกค้าในอดีต</p>
+                    </div>
+                    <div class="minimal-card p-6">
+                        <div class="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center mb-4 text-slate-600">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <h4 class="text-base font-bold mb-2 text-slate-800">Price Prediction</h4>
+                        <p class="text-slate-500 text-sm">พยากรณ์แนวโน้มราคาสินทรัพย์หรือราคาหุ้นในอนาคต โดยใช้ข้อมูลปัจจัยแวดล้อมและราคาที่เกิดขึ้นในอดีต</p>
+                    </div>
+                    <div class="minimal-card p-6">
+                        <div class="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center mb-4 text-slate-600">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h4 class="text-base font-bold mb-2 text-slate-800">Fraud Detection</h4>
+                        <p class="text-slate-500 text-sm">จำแนกรายการธุรกรรมที่ทุจริตออกจากธุรกรรมปกติ เพื่อป้องกันและอายัดบัตรเครดิตได้อย่างทันท่วงที</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Unsupervised -->
+            <div id="content-unsupervised" class="hidden transition-opacity duration-300">
+                <div class="bg-white rounded-2xl p-6 mb-8 text-center max-w-3xl mx-auto border border-slate-100 shadow-sm">
+                    <h3 class="font-bold text-slate-800 mb-2">เรียนรู้แบบไม่มีผู้สอน (Unsupervised Learning)</h3>
+                    <p class="text-slate-500 text-sm">โมเดลทำการวิเคราะห์ข้อมูลที่ไม่มีการเฉลยคำตอบ (Unlabeled Data) เพื่อค้นหารูปแบบ โครงสร้าง หรือความสัมพันธ์ที่ซ่อนอยู่ภายในข้อมูล</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="minimal-card p-6">
+                        <div class="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center mb-4 text-slate-600">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <h4 class="text-base font-bold mb-2 text-slate-800">Customer Segmentation</h4>
+                        <p class="text-slate-500 text-sm">จัดกลุ่มลูกค้าหรือนักลงทุนตามพฤติกรรม เพื่อให้สถาบันการเงินสามารถนำเสนอผลิตภัณฑ์ที่เหมาะสมกับแต่ละกลุ่มได้อย่างแม่นยำ</p>
+                    </div>
+                    <div class="minimal-card p-6">
+                        <div class="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center mb-4 text-slate-600">
+                            <i class="fa-solid fa-diagram-project"></i>
+                        </div>
+                        <h4 class="text-base font-bold mb-2 text-slate-800">Portfolio Diversification</h4>
+                        <p class="text-slate-500 text-sm">จัดกลุ่มสินทรัพย์ที่มีความสัมพันธ์กันต่ำ เพื่อนำมาใช้ในการกระจายความเสี่ยงของพอร์ตการลงทุนให้มีประสิทธิภาพสูงสุด</p>
+                    </div>
+                    <div class="minimal-card p-6">
+                        <div class="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center mb-4 text-slate-600">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i>
+                        </div>
+                        <h4 class="text-base font-bold mb-2 text-slate-800">Anomaly Detection</h4>
+                        <p class="text-slate-500 text-sm">ตรวจจับพฤติกรรมทางการเงินที่ผิดปกติ หรือรายการที่มีลักษณะแตกต่างไปจากกลุ่มข้อมูลส่วนใหญ่ เพื่อเฝ้าระวังความเสี่ยง</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard & Calculator Section -->
+    <section id="dashboard" class="py-24 bg-white border-t border-slate-100 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-slate-900">แดชบอร์ดจำลองการจัดสรรเงิน</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto text-sm">
+                    ทดลองวางแผนรายได้ของคุณตามกฎ <span class="text-brand-600 font-semibold">50/30/20</span> กรุณากรอกรายได้ต่อเดือนด้านล่างเพื่อประเมินผล
+                </p>
+            </div>
+
+            <div class="bg-slate-50 rounded-3xl p-6 md:p-8 border border-slate-200">
+                <!-- Input Row -->
+                <div class="max-w-xl mx-auto mb-10">
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <div class="relative flex-grow">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <span class="text-slate-400">฿</span>
+                            </div>
+                            <input type="number" id="income" placeholder="กรอกรายรับต่อเดือน..." 
+                                class="w-full pl-10 pr-4 py-3 bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-400 focus:border-brand-400 outline-none text-slate-800 transition">
+                        </div>
+                        <button onclick="updateDashboard()" class="bg-brand-400 text-slate-900 font-semibold px-8 py-3 rounded-xl hover:bg-brand-500 transition whitespace-nowrap shadow-sm">
+                            คำนวณ
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Dashboard Content (Hidden by default) -->
+                <div id="dashboard-content" class="hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        
+                        <!-- Left: Stats Cards -->
+                        <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Needs Card -->
+                            <div class="minimal-card p-6 border-l-4 border-l-slate-400">
+                                <div class="text-slate-500 text-xs font-bold mb-1 uppercase">50% สิ่งจำเป็น (Needs)</div>
+                                <div class="text-2xl font-bold text-slate-800 mb-2" id="val-needs">฿ 0</div>
+                                <p class="text-xs text-slate-500">ค่าที่พัก, ค่าเดินทาง, อาหารมื้อหลัก, ค่าน้ำประปา ไฟฟ้า, ชำระหนี้สินขั้นต่ำ</p>
+                            </div>
+
+                            <!-- Wants Card -->
+                            <div class="minimal-card p-6 border-l-4 border-l-brand-300">
+                                <div class="text-slate-500 text-xs font-bold mb-1 uppercase">30% ความต้องการ (Wants)</div>
+                                <div class="text-2xl font-bold text-slate-800 mb-2" id="val-wants">฿ 0</div>
+                                <p class="text-xs text-slate-500">ซื้อของใช้ส่วนตัว, รับประทานอาหารนอกบ้าน, ท่องเที่ยว, ความบันเทิงต่างๆ</p>
+                            </div>
+
+                            <!-- Savings Card -->
+                            <div class="minimal-card p-6 border-l-4 border-l-brand-500 sm:col-span-2">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <div class="text-slate-500 text-xs font-bold mb-1 uppercase">20% ออม & ลงทุน (Savings)</div>
+                                        <div class="text-3xl font-bold text-slate-800 mb-2" id="val-savings">฿ 0</div>
+                                        <p class="text-xs text-slate-500">เงินสำรองฉุกเฉิน, กองทุนรวม, หุ้น, ประกันชีวิต, เงินทุนเกษียณอายุ</p>
+                                    </div>
+                                    <div class="w-12 h-12 bg-brand-50 rounded-full hidden sm:flex items-center justify-center text-brand-500">
+                                        <i class="fa-solid fa-piggy-bank"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: Chart -->
+                        <div class="minimal-card p-6 flex flex-col items-center justify-center">
+                            <h3 class="text-sm font-semibold text-slate-700 mb-4 w-full text-center">สัดส่วนการจัดสรรเงิน</h3>
+                            <div class="relative w-48 h-48">
+                                <canvas id="budgetChart"></canvas>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div id="empty-dashboard" class="py-12 text-center text-slate-400">
+                    <i class="fa-solid fa-calculator text-3xl mb-4 opacity-50"></i>
+                    <p class="text-sm">กรอกรายได้ด้านบนเพื่อดูผลลัพธ์การคำนวณ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Modal / Alert -->
+    <div id="customModal" class="fixed inset-0 bg-slate-900/40 z-[100] hidden flex items-center justify-center backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full mx-4 transform scale-95 transition-transform" id="modalContent">
+            <div class="flex items-center justify-center w-12 h-12 rounded-full bg-red-50 text-red-500 mb-4 mx-auto">
+                <i class="fa-solid fa-circle-exclamation text-xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-center text-slate-900 mb-2">ข้อมูลไม่ถูกต้อง</h3>
+            <p class="text-center text-slate-500 text-sm mb-6">กรุณากรอกรายรับเป็นตัวเลขที่มากกว่า 0</p>
+            <button onclick="closeModal()" class="w-full bg-slate-800 text-white font-semibold py-2.5 rounded-xl hover:bg-slate-700 transition">
+                ตกลง
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-brand-50 border-t border-brand-100 py-10 text-center text-sm">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center justify-center mb-6 gap-2">
+                <div class="w-6 h-6 bg-brand-400 rounded-md flex items-center justify-center text-white text-xs">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <span class="font-bold text-lg text-slate-800">yourfinplan101</span>
+            </div>
+            <div class="bg-white border border-slate-200 text-slate-600 px-6 py-4 rounded-xl inline-block max-w-2xl text-xs mb-6 shadow-sm leading-relaxed">
+                <strong>คำเตือน:</strong> เว็บไซต์นี้จัดทำขึ้นเพื่อวัตถุประสงค์ในการศึกษาและแนะนำแนวทางการวางแผนการเงินเบื้องต้นเท่านั้น ไม่ถือเป็นคำแนะนำทางการลงทุนโดยตรง ผู้ลงทุนควรศึกษาข้อมูลและประเมินความเสี่ยงก่อนตัดสินใจลงทุนทุกครั้ง
+            </div>
+            <p class="text-slate-400">&copy; 2024 yourfinplan101. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Script for Dashboard & Chart -->
+    <script>
+        // Tab Switching Logic for ML Section
+        function switchTab(tab) {
+            const supBtn = document.getElementById('tab-supervised');
+            const unsupBtn = document.getElementById('tab-unsupervised');
+            const supContent = document.getElementById('content-supervised');
+            const unsupContent = document.getElementById('content-unsupervised');
+
+            const activeBtnClass = "px-6 sm:px-10 py-2.5 font-semibold text-slate-900 bg-brand-400 rounded-full transition text-sm whitespace-nowrap";
+            const inactiveBtnClass = "px-6 sm:px-10 py-2.5 font-medium text-slate-500 hover:text-slate-700 rounded-full transition text-sm whitespace-nowrap";
+
+            if (tab === 'supervised') {
+                supBtn.className = activeBtnClass;
+                unsupBtn.className = inactiveBtnClass;
+                supContent.classList.remove('hidden');
+                unsupContent.classList.add('hidden');
+            } else {
+                unsupBtn.className = activeBtnClass;
+                supBtn.className = inactiveBtnClass;
+                unsupContent.classList.remove('hidden');
+                supContent.classList.add('hidden');
+            }
+        }
+
+        // Chart Initialization
+        let budgetChart;
+        const ctx = document.getElementById('budgetChart').getContext('2d');
+        
+        function initChart() {
+            budgetChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['จำเป็น (50%)', 'ต้องการ (30%)', 'ออม/ลงทุน (20%)'],
+                    datasets: [{
+                        data: [50, 30, 20], 
+                        backgroundColor: [
+                            '#fecdd3', // Soft pink (Needs)
+                            '#fff5f5', // Cream (Wants)
+                            '#fb7185', // Rose pink (Savings)
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(context.parsed);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Wait for DOM to load
+        document.addEventListener('DOMContentLoaded', function() {
+            initChart();
+        });
+
+        // Format Currency Function
+        const formatMoney = (amount) => {
+            return new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(amount);
+        };
+
+        // Modal Functions
+        function showModal() {
+            const modal = document.getElementById('customModal');
+            const content = document.getElementById('modalContent');
+            modal.classList.remove('hidden');
+            // Trigger animation
+            setTimeout(() => {
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('customModal');
+            const content = document.getElementById('modalContent');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 200);
+        }
+
+        // Calculation Logic
+        function updateDashboard() {
+            const incomeInput = document.getElementById('income').value;
+            const income = parseFloat(incomeInput);
+
+            if (isNaN(income) || income <= 0) {
+                showModal();
+                return;
+            }
+
+            // Calculate values
+            const needs = income * 0.50;
+            const wants = income * 0.30;
+            const savings = income * 0.20;
+
+            // Update UI Text
+            document.getElementById('val-needs').innerText = formatMoney(needs);
+            document.getElementById('val-wants').innerText = formatMoney(wants);
+            document.getElementById('val-savings').innerText = formatMoney(savings);
+
+            // Update Chart Data
+            budgetChart.data.datasets[0].data = [needs, wants, savings];
+            budgetChart.update();
+
+            // Toggle Visibility
+            document.getElementById('empty-dashboard').classList.add('hidden');
+            document.getElementById('dashboard-content').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
